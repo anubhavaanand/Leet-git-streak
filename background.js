@@ -290,12 +290,20 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'dailyCheck') {
     // Query active tab to check if it's LeetCode
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0] && tabs[0].url && tabs[0].url.includes('leetcode.com')) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'getStreakData' }, (response) => {
-          if (response && response.hasSubmissionToday) {
-            syncToGitHub();
+      if (tabs[0] && tabs[0].url) {
+        try {
+          const url = new URL(tabs[0].url);
+          // Check if the hostname is exactly leetcode.com or a subdomain
+          if (url.hostname === 'leetcode.com' || url.hostname.endsWith('.leetcode.com')) {
+            chrome.tabs.sendMessage(tabs[0].id, { action: 'getStreakData' }, (response) => {
+              if (response && response.hasSubmissionToday) {
+                syncToGitHub();
+              }
+            });
           }
-        });
+        } catch (e) {
+          // Invalid URL, ignore
+        }
       }
     });
   }
