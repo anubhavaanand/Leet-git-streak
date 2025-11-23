@@ -13,7 +13,7 @@ class GitHubAPI {
     const options = {
       method: method,
       headers: {
-        'Authorization': `token ${this.token}`,
+        'Authorization': `Bearer ${this.token}`,
         'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
       }
@@ -88,7 +88,7 @@ class GitHubAPI {
 
       const body = {
         message: message,
-        content: btoa(content), // Base64 encode
+        content: btoa(unescape(encodeURIComponent(content))), // Base64 encode with UTF-8 support
         sha: sha // Only needed for updates
       };
 
@@ -283,7 +283,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 // Set up daily check alarm
 chrome.alarms.create('dailyCheck', {
-  periodInMinutes: 60 // Check every hour
+  periodInMinutes: 180 // Check every 3 hours for better battery life
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {

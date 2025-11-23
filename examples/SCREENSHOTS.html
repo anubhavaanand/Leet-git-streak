@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Extension Screenshots</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      padding: 40px;
+      background: #f5f5f5;
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    
+    .screenshot-section {
+      margin-bottom: 50px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+    
+    .description {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .demo-popup {
+      width: 400px;
+      margin: 20px auto;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .feature-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .feature-list li:before {
+      content: "✓ ";
+      color: #4caf50;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    
+    .code-block {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 20px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    
+    .setup-steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding: 0;
+    }
+    
+    .setup-steps li {
+      counter-increment: step-counter;
+      padding: 15px 0 15px 50px;
+      position: relative;
+      border-left: 2px solid #667eea;
+      margin-left: 20px;
+    }
+    
+    .setup-steps li:before {
+      content: counter(step-counter);
+      position: absolute;
+      left: -15px;
+      top: 15px;
+      background: #667eea;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 LeetCode to GitHub Streak Extension - Visual Guide</h1>
+  
+  <div class="screenshot-section">
+    <h2>Extension Popup</h2>
+    <p class="description">
+      The extension features a beautiful gradient popup interface where users can configure their GitHub credentials and monitor their streak.
+    </p>
+    <div class="demo-popup">
+      <iframe src="../popup.html" style="width: 400px; height: 600px; border: none;"></iframe>
+    </div>
+  </div>
+  
+  <div class="screenshot-section">
+    <h2>Key Features</h2>
+    <ul class="feature-list">
+      <li>Automatic GitHub commit creation when solving LeetCode problems</li>
+      <li>Secure token storage using Chrome's sync storage</li>
+      <li>Beautiful gradient UI with real-time status updates</li>
+      <li>Daily streak tracking and statistics</li>
+      <li>Browser notifications for sync confirmations</li>
+      <li>Automatic repository creation if it doesn't exist</li>
+      <li>One commit per day to maintain clean contribution graph</li>
+      <li>Hourly background checks for activity</li>
+    </ul>
+  </div>
+  
+  <div class="screenshot-section">
+    <h2>Quick Setup Guide</h2>
+    <ol class="setup-steps">
+      <li>Install the extension in Chrome (or any Chromium-based browser)</li>
+      <li>Create a GitHub Personal Access Token with 'repo' scope</li>
+      <li>Click the extension icon and enter your credentials</li>
+      <li>Start solving LeetCode problems!</li>
+      <li>Watch your GitHub contribution graph grow automatically</li>
+    </ol>
+  </div>
+  
+  <div class="screenshot-section">
+    <h2>Example Commit</h2>
+    <p class="description">
+      Each day you solve a problem, the extension creates a commit like this:
+    </p>
+    <div class="code-block">
+commit 7d695ce1234567890abcdef<br>
+Author: Your Name &lt;you@example.com&gt;<br>
+Date:   Wed Jan 15 14:23:45 2025 -0800<br>
+<br>
+    Solved: Two Sum - 2025-01-15<br>
+<br>
+    diff --git a/streak/2025-01-15.md b/streak/2025-01-15.md<br>
+    new file mode 100644<br>
+    --- /dev/null<br>
+    +++ b/streak/2025-01-15.md<br>
+    @@ -0,0 +1,5 @@<br>
+    +# LeetCode Activity - 2025-01-15 14:23:45<br>
+    +<br>
+    +## Problem Solved<br>
+    +Two Sum<br>
+    +<br>
+    +Timestamp: 2025-01-15T14:23:45.678Z
+    </div>
+  </div>
+  
+  <div class="screenshot-section">
+    <h2>How It Works</h2>
+    <p class="description">
+      The extension uses three main components:
+    </p>
+    <ul class="feature-list">
+      <li><strong>Content Script:</strong> Monitors LeetCode pages for solved problems</li>
+      <li><strong>Background Worker:</strong> Handles GitHub API calls and creates commits</li>
+      <li><strong>Popup Interface:</strong> Provides configuration and status display</li>
+    </ul>
+  </div>
+  
+  <div class="screenshot-section">
+    <h2>GitHub Contribution Graph Example</h2>
+    <p class="description">
+      After using the extension, your GitHub profile will show consistent contributions:
+    </p>
+    <svg width="720" height="110" style="margin: 20px auto; display: block;">
+      <g transform="translate(10, 20)">
+        <!-- Week labels -->
+        <text x="-10" y="8" style="font-size: 9px; fill: #666;">Mon</text>
+        <text x="-10" y="22" style="font-size: 9px; fill: #666;">Wed</text>
+        <text x="-10" y="36" style="font-size: 9px; fill: #666;">Fri</text>
+        
+        <!-- Contribution squares (simulated 52 weeks) -->
+        <g id="contributions">
+          <!-- Generate contribution squares with JavaScript or manually -->
+        </g>
+      </g>
+    </svg>
+    <script>
+      // Generate contribution squares
+      const svg = document.querySelector('#contributions');
+      const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+      
+      for (let week = 0; week < 52; week++) {
+        for (let day = 0; day < 7; day++) {
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          const x = week * 14;
+          const y = day * 13;
+          // Simulate activity with random colors (more green after using extension)
+          const colorIndex = week > 30 ? Math.floor(Math.random() * 3) + 2 : Math.floor(Math.random() * 2);
+          rect.setAttribute('x', x);
+          rect.setAttribute('y', y);
+          rect.setAttribute('width', 11);
+          rect.setAttribute('height', 11);
+          rect.setAttribute('fill', colors[colorIndex]);
+          rect.setAttribute('rx', 2);
+          svg.appendChild(rect);
+        }
+      }
+    </script>
+  </div>
+  
+</body>
+</html>

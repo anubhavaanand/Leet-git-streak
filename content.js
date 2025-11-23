@@ -12,24 +12,25 @@ function extractLeetCodeStreak() {
     // Try to find the current streak number
     let streakValue = null;
     
-    // Method 1: Look for streak text
-    const textNodes = document.evaluate(
-      "//text()[contains(., 'day streak') or contains(., 'Day Streak') or contains(., 'Current Streak')]",
-      document,
-      null,
-      XPathResult.ANY_TYPE,
-      null
-    );
+    // Method 1: Look for streak text using querySelector for better performance
+    const streakTextElements = document.querySelectorAll('[class*="streak"], [data-cy*="streak"], [aria-label*="streak"]');
     
-    let node = textNodes.iterateNext();
-    while (node) {
-      const text = node.textContent;
+    for (const element of streakTextElements) {
+      const text = element.textContent;
       const match = text.match(/(\d+)\s*day/i);
       if (match) {
         streakValue = parseInt(match[1]);
         break;
       }
-      node = textNodes.iterateNext();
+    }
+    
+    // Fallback: search in all text content if not found
+    if (!streakValue) {
+      const bodyText = document.body.innerText;
+      const match = bodyText.match(/(\d+)\s*day\s*streak/i);
+      if (match) {
+        streakValue = parseInt(match[1]);
+      }
     }
     
     // Method 2: Check for submission today
