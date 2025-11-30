@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Generator - Leet-Git Streak</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #667eea;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 10px;
+            display: block;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .icon-preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .icon-preview label {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Leet-Git Streak Icon Generator</h1>
+        <p>Click the buttons below to generate and download icon files for the extension.</p>
+        
+        <div class="icon-preview">
+            <canvas id="icon16" width="16" height="16"></canvas>
+            <label>16x16</label>
+            <button onclick="generateIcon(16)">Generate & Download</button>
+        </div>
+        
+        <div class="icon-preview">
+            <canvas id="icon48" width="48" height="48"></canvas>
+            <label>48x48</label>
+            <button onclick="generateIcon(48)">Generate & Download</button>
+        </div>
+        
+        <div class="icon-preview">
+            <canvas id="icon128" width="128" height="128"></canvas>
+            <label>128x128</label>
+            <button onclick="generateIcon(128)">Generate & Download</button>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <button onclick="generateAll()" style="background: #28a745;">Generate All Icons</button>
+        </div>
+    </div>
+
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            
+            // Fill background
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Draw fire emoji or simple flame shape
+            ctx.fillStyle = '#ff6b35';
+            ctx.strokeStyle = '#ff8c42';
+            ctx.lineWidth = Math.max(1, size / 32);
+            
+            // Simple flame shape
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const flameSize = size * 0.6;
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + flameSize / 2);
+            ctx.quadraticCurveTo(centerX - flameSize / 3, centerY, centerX - flameSize / 6, centerY - flameSize / 3);
+            ctx.quadraticCurveTo(centerX, centerY - flameSize / 2, centerX + flameSize / 6, centerY - flameSize / 3);
+            ctx.quadraticCurveTo(centerX + flameSize / 3, centerY, centerX, centerY + flameSize / 2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function generateIcon(size) {
+            const canvas = document.getElementById(`icon${size}`);
+            drawIcon(canvas, size);
+            
+            // Convert to blob and download
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `icon${size}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        function generateAll() {
+            [16, 48, 128].forEach((size, index) => {
+                setTimeout(() => generateIcon(size), index * 500);
+            });
+        }
+
+        // Draw previews on load
+        window.onload = function() {
+            drawIcon(document.getElementById('icon16'), 16);
+            drawIcon(document.getElementById('icon48'), 48);
+            drawIcon(document.getElementById('icon128'), 128);
+        };
+    </script>
+</body>
+</html>
+

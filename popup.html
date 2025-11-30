@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leet-Git Streak</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔥 Leet-Git Streak</h1>
+      <p class="subtitle">Sync your LeetCode streaks to GitHub</p>
+    </header>
+
+    <div class="section">
+      <h2>Configuration</h2>
+      
+      <div class="form-group">
+        <label for="githubToken">GitHub Personal Access Token</label>
+        <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+        <small>Create one at: <a href="https://github.com/settings/tokens" target="_blank">GitHub Settings</a></small>
+      </div>
+
+      <div class="form-group">
+        <label for="repoOwner">Repository Owner</label>
+        <input type="text" id="repoOwner" placeholder="your-username">
+      </div>
+
+      <div class="form-group">
+        <label for="repoName">Repository Name</label>
+        <input type="text" id="repoName" placeholder="leetcode-streak">
+      </div>
+
+      <div class="form-group">
+        <label for="branch">Branch</label>
+        <input type="text" id="branch" placeholder="main" value="main">
+      </div>
+
+      <div class="form-group">
+        <label for="filePath">File Path</label>
+        <input type="text" id="filePath" placeholder="leetcode-streak.md" value="leetcode-streak.md">
+      </div>
+
+      <button id="saveConfig" class="btn btn-primary">Save Configuration</button>
+    </div>
+
+    <div class="section">
+      <h2>Status</h2>
+      <div id="status" class="status-box">
+        <p>Checking status...</p>
+      </div>
+      
+      <div class="info-box">
+        <p><strong>Last Commit:</strong> <span id="lastCommit">Never</span></p>
+        <p><strong>Current Streak:</strong> <span id="currentStreak">-</span></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <button id="testConnection" class="btn btn-secondary">Test Connection</button>
+      <button id="manualCommit" class="btn btn-secondary">Create Commit Now</button>
+    </div>
+
+    <div id="message" class="message"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+
