@@ -2,63 +2,102 @@
 
 A browser extension that automatically transfers your LeetCode streaks into GitHub streaks effortlessly. Never lose your GitHub contribution streak again!
 
-## Features
+## ✨ Features
 
+- 🎯 **3-Step Setup Wizard**: Super easy installation with guided setup (similar to POCO!)
 - 🔍 **Automatic Detection**: Monitors your LeetCode activity and detects when you solve problems
 - 🔄 **Auto-Sync**: Automatically creates GitHub commits when you solve LeetCode problems
-- ⚙️ **Easy Configuration**: Simple setup through the extension popup
+- 🔑 **Token Verification**: Real-time GitHub token validation with auto username detection
+- 📦 **Auto Repository Creation**: Creates GitHub repository automatically if it doesn't exist
 - 📊 **Status Tracking**: View your current streak and last commit status
 - 🎯 **Manual Control**: Create commits manually or test your connection anytime
+- 💫 **Smart Defaults**: Pre-filled values for quick setup
 
-## Installation
+## 🚀 Quick Setup (3 Easy Steps!)
 
-### Chrome/Edge (Chromium-based browsers)
+### Step 1: Install the Extension
 
-1. **Download or Clone this repository**
+#### For Brave/Chrome/Edge (Chromium-based browsers)
+
+1. **Clone or Download this repository**
    ```bash
-   git clone https://github.com/your-username/Leet-git-streak.git
+   git clone https://github.com/anubhavaanand/Leet-git-streak.git
    cd Leet-git-streak
    ```
 
-2. **Load the extension**
-   - Open Chrome/Edge and navigate to `chrome://extensions/` (or `edge://extensions/`)
-   - Enable "Developer mode" (toggle in the top right)
-   - Click "Load unpacked"
+2. **Load the extension in your browser**
+   - Open **Brave/Chrome/Edge** and go to:
+     - Brave: `brave://extensions/`
+     - Chrome: `chrome://extensions/`
+     - Edge: `edge://extensions/`
+   - Enable **"Developer mode"** (toggle in the top right)
+   - Click **"Load unpacked"**
    - Select the `Leet-git-streak` folder
+   - The extension icon should appear in your toolbar! 🔥
 
-3. **Create Extension Icons** (Required)
-   - The extension needs icon files at `icons/icon16.png`, `icons/icon48.png`, and `icons/icon128.png`
-   - You can create simple icons or use an online icon generator
-   - Minimum sizes: 16x16, 48x48, 128x128 pixels
+> **Note:** Icons are already included in the repository, so no need to create them manually!
 
-## Setup
+### Step 2: Run the Setup Wizard
+
+1. **Click the extension icon** in your browser toolbar
+2. You'll see a **3-step setup wizard** that guides you through:
+   
+   **Step 1: Get GitHub Token**
+   - Click the **"Open GitHub Token Settings"** button
+   - Click **"Generate new token (classic)"**
+   - Check the **`repo`** checkbox
+   - Click **"Generate token"** and copy it
+   - Paste the token in the wizard and click **"Verify Token"**
+   - Your GitHub username will be auto-detected! ✨
+   
+   **Step 2: Repository Setup**
+   - Your username is already filled in
+   - Enter a repository name (default: `leetcode-streak`)
+   - The extension will create the repository automatically if it doesn't exist!
+   
+   **Step 3: Final Configuration**
+   - Branch and file path are pre-filled with smart defaults
+   - Click **"Finish Setup"** and you're done! 🎉
+
+### Step 3: Start Using!
+
+That's it! The extension is now configured and will:
+- ✅ Automatically detect your LeetCode activity
+- ✅ Create GitHub commits daily to maintain your streak
+- ✅ Track everything in a markdown file in your repository
+
+## 📋 Manual Setup (Alternative)
+
+If you prefer to set up manually instead of using the wizard:
 
 ### 1. Create a GitHub Personal Access Token
 
 1. Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
-2. Click "Generate new token (classic)"
-3. Give it a name like "Leet-Git Streak"
-4. Select the `repo` scope (full control of private repositories)
-5. Click "Generate token"
+2. Click **"Generate new token (classic)"**
+3. Give it a name: `Leet-Git Streak`
+4. Select the **`repo`** scope (full control of private repositories)
+5. Click **"Generate token"**
 6. **Copy the token immediately** (you won't see it again!)
 
-### 2. Create a GitHub Repository
+### 2. Create a GitHub Repository (Optional)
 
-Create a new repository (or use an existing one) where you want to track your LeetCode streaks. For example:
-- Repository name: `leetcode-streak`
-- Make it public or private (your choice)
+Create a new repository (or use an existing one):
+- Repository name: `leetcode-streak` (or any name you prefer)
+- Can be public or private
+- The extension can create it automatically if you have the token!
 
-### 3. Configure the Extension
+### 3. Configure Manually
 
-1. Click the extension icon in your browser toolbar
-2. Fill in the configuration:
-   - **GitHub Token**: Paste your personal access token
+1. Click the extension icon
+2. Click **"⚙️ Edit Settings"**
+3. Fill in:
+   - **GitHub Token**: Your personal access token
    - **Repository Owner**: Your GitHub username
-   - **Repository Name**: The repository name (e.g., `leetcode-streak`)
+   - **Repository Name**: Your repository name
    - **Branch**: Usually `main` or `master`
-   - **File Path**: Path to the file that will track streaks (e.g., `leetcode-streak.md`)
-3. Click "Save Configuration"
-4. Click "Test Connection" to verify everything works
+   - **File Path**: `leetcode-streak.md` (or your preferred path)
+4. Click **"Save Configuration"**
+5. Click **"Test Connection"** to verify
 
 ## How It Works
 
@@ -67,19 +106,27 @@ Create a new repository (or use an existing one) where you want to track your Le
 3. **Auto-Commit**: If activity is detected and you haven't committed today, it automatically creates a GitHub commit
 4. **Streak Maintenance**: The commit updates a markdown file in your repository, maintaining your GitHub contribution streak
 
-## Usage
+## 💻 Usage
 
 ### Automatic Mode (Recommended)
 
-1. Just use LeetCode normally - solve problems, check your profile, etc.
-2. The extension automatically detects activity and creates commits
+1. Just use **LeetCode normally** - solve problems, check your profile, etc.
+2. The extension **automatically detects activity** and creates commits
 3. Check the extension popup to see status and last commit date
+4. **One commit per day** to maintain your GitHub streak
 
 ### Manual Mode
 
 1. Click the extension icon
-2. Click "Create Commit Now" to manually create a commit
+2. Click **"🚀 Create Commit Now"** in the Quick Actions section
 3. Useful if you want to commit outside of LeetCode activity
+
+### Check Status
+
+- Click the extension icon anytime
+- View your **last commit date**
+- See your **current LeetCode streak** (when on LeetCode)
+- Check your **repository information**
 
 ## File Format
 
