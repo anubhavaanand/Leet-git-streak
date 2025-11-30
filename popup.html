@@ -7,42 +7,130 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <div class="container">
+  <!-- Setup Wizard (shown first time) -->
+  <div id="setupWizard" class="wizard-container" style="display: none;">
+    <div class="wizard-step active" data-step="1">
+      <div class="wizard-header">
+        <h1>🔥 Welcome to Leet-Git Streak!</h1>
+        <p>Let's get you set up in 3 easy steps</p>
+      </div>
+      
+      <div class="wizard-content">
+        <div class="step-indicator">
+          <div class="step active">1</div>
+          <div class="step">2</div>
+          <div class="step">3</div>
+        </div>
+        
+        <h2>Step 1: Get Your GitHub Token</h2>
+        <div class="setup-instructions">
+          <ol>
+            <li>Click the button below to open GitHub Settings</li>
+            <li>Click "Generate new token (classic)"</li>
+            <li>Check the <strong>repo</strong> checkbox</li>
+            <li>Click "Generate token" and copy it</li>
+          </ol>
+          <a href="https://github.com/settings/tokens/new" target="_blank" class="btn btn-primary">
+            🔑 Open GitHub Token Settings
+          </a>
+        </div>
+        
+        <div class="form-group">
+          <label for="wizardToken">Paste your GitHub token here:</label>
+          <input type="password" id="wizardToken" placeholder="ghp_xxxxxxxxxxxx">
+          <button id="verifyToken" class="btn btn-secondary" style="margin-top: 10px;">Verify Token</button>
+        </div>
+      </div>
+      
+      <div class="wizard-footer">
+        <button id="nextStep1" class="btn btn-primary" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div class="wizard-step" data-step="2">
+      <div class="wizard-header">
+        <h1>📦 Repository Setup</h1>
+        <p>Choose where to track your streaks</p>
+      </div>
+      
+      <div class="wizard-content">
+        <div class="step-indicator">
+          <div class="step completed">✓</div>
+          <div class="step active">2</div>
+          <div class="step">3</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="wizardRepoOwner">GitHub Username:</label>
+          <input type="text" id="wizardRepoOwner" placeholder="your-username">
+          <small>Auto-detected from your token</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="wizardRepoName">Repository Name:</label>
+          <input type="text" id="wizardRepoName" placeholder="leetcode-streak" value="leetcode-streak">
+          <small>We'll create this repository if it doesn't exist</small>
+        </div>
+        
+        <div class="info-box">
+          <p><strong>💡 Tip:</strong> The extension will create the repository automatically if it doesn't exist!</p>
+        </div>
+      </div>
+      
+      <div class="wizard-footer">
+        <button id="prevStep2" class="btn btn-secondary">← Back</button>
+        <button id="nextStep2" class="btn btn-primary">Next →</button>
+      </div>
+    </div>
+
+    <div class="wizard-step" data-step="3">
+      <div class="wizard-header">
+        <h1>🎉 Almost Done!</h1>
+        <p>Final configuration</p>
+      </div>
+      
+      <div class="wizard-content">
+        <div class="step-indicator">
+          <div class="step completed">✓</div>
+          <div class="step completed">✓</div>
+          <div class="step active">3</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="wizardBranch">Branch:</label>
+          <input type="text" id="wizardBranch" value="main" placeholder="main">
+        </div>
+        
+        <div class="form-group">
+          <label for="wizardFilePath">File Path:</label>
+          <input type="text" id="wizardFilePath" value="leetcode-streak.md" placeholder="leetcode-streak.md">
+        </div>
+        
+        <div class="info-box">
+          <p><strong>✅ Ready to go!</strong> Click finish to start tracking your streaks.</p>
+        </div>
+      </div>
+      
+      <div class="wizard-footer">
+        <button id="prevStep3" class="btn btn-secondary">← Back</button>
+        <button id="finishSetup" class="btn btn-primary">✨ Finish Setup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Interface (shown after setup) -->
+  <div id="mainInterface" class="container">
     <header>
       <h1>🔥 Leet-Git Streak</h1>
       <p class="subtitle">Sync your LeetCode streaks to GitHub</p>
     </header>
 
     <div class="section">
-      <h2>Configuration</h2>
-      
-      <div class="form-group">
-        <label for="githubToken">GitHub Personal Access Token</label>
-        <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
-        <small>Create one at: <a href="https://github.com/settings/tokens" target="_blank">GitHub Settings</a></small>
+      <h2>Quick Actions</h2>
+      <div class="quick-actions">
+        <button id="quickCommit" class="btn btn-primary">🚀 Create Commit Now</button>
+        <button id="testConnection" class="btn btn-secondary">🔍 Test Connection</button>
       </div>
-
-      <div class="form-group">
-        <label for="repoOwner">Repository Owner</label>
-        <input type="text" id="repoOwner" placeholder="your-username">
-      </div>
-
-      <div class="form-group">
-        <label for="repoName">Repository Name</label>
-        <input type="text" id="repoName" placeholder="leetcode-streak">
-      </div>
-
-      <div class="form-group">
-        <label for="branch">Branch</label>
-        <input type="text" id="branch" placeholder="main" value="main">
-      </div>
-
-      <div class="form-group">
-        <label for="filePath">File Path</label>
-        <input type="text" id="filePath" placeholder="leetcode-streak.md" value="leetcode-streak.md">
-      </div>
-
-      <button id="saveConfig" class="btn btn-primary">Save Configuration</button>
     </div>
 
     <div class="section">
@@ -54,12 +142,41 @@
       <div class="info-box">
         <p><strong>Last Commit:</strong> <span id="lastCommit">Never</span></p>
         <p><strong>Current Streak:</strong> <span id="currentStreak">-</span></p>
+        <p><strong>Repository:</strong> <span id="repoInfo">-</span></p>
       </div>
     </div>
 
     <div class="section">
-      <button id="testConnection" class="btn btn-secondary">Test Connection</button>
-      <button id="manualCommit" class="btn btn-secondary">Create Commit Now</button>
+      <h2>Configuration</h2>
+      <button id="editConfig" class="btn btn-secondary">⚙️ Edit Settings</button>
+      <div id="configPanel" style="display: none; margin-top: 15px;">
+        <div class="form-group">
+          <label for="githubToken">GitHub Token</label>
+          <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+        </div>
+
+        <div class="form-group">
+          <label for="repoOwner">Repository Owner</label>
+          <input type="text" id="repoOwner" placeholder="your-username">
+        </div>
+
+        <div class="form-group">
+          <label for="repoName">Repository Name</label>
+          <input type="text" id="repoName" placeholder="leetcode-streak">
+        </div>
+
+        <div class="form-group">
+          <label for="branch">Branch</label>
+          <input type="text" id="branch" placeholder="main" value="main">
+        </div>
+
+        <div class="form-group">
+          <label for="filePath">File Path</label>
+          <input type="text" id="filePath" placeholder="leetcode-streak.md" value="leetcode-streak.md">
+        </div>
+
+        <button id="saveConfig" class="btn btn-primary">Save Configuration</button>
+      </div>
     </div>
 
     <div id="message" class="message"></div>
@@ -68,4 +185,3 @@
   <script src="popup.js"></script>
 </body>
 </html>
-
