@@ -1,6 +1,19 @@
 # 🔥 Leet-Git Streak
 
+[![GitHub stars](https://img.shields.io/github/stars/anubhavaanand/Leet-git-streak?style=social)](https://github.com/anubhavaanand/Leet-git-streak/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/anubhavaanand/Leet-git-streak)
+[![Browser](https://img.shields.io/badge/browser-Chrome%20%7C%20Brave%20%7C%20Edge-brightgreen.svg)](https://github.com/anubhavaanand/Leet-git-streak)
+
 A browser extension that automatically transfers your LeetCode streaks into GitHub streaks effortlessly. Never lose your GitHub contribution streak again!
+
+## 📸 Screenshots
+
+<div align="center">
+  <img src="screenshots/setup-wizard.png" alt="Setup Wizard" width="400"/>
+  <img src="screenshots/dashboard.png" alt="Dashboard" width="400"/>
+  <p><em>Easy 3-step setup wizard and intuitive dashboard</em></p>
+</div>
 
 ## ✨ Features
 
